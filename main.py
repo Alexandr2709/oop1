@@ -23,9 +23,11 @@ class Mentor:
         else:
             return 'Ошибка'
 
+
 class Lector(Mentor):
     """класс лекторов"""
     pass
+
 
 class Reviewer(Mentor):
     """класс проверяющих"""
