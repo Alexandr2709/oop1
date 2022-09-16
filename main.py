@@ -121,7 +121,7 @@ student1.courses_now = ['Stepik', 'Python', 'English']
 student1.end_courses = ['SQL']
 
 student2 = Student("Mikha", "Egorof", "man")
-student2.courses_now = ['Python', 'English']
+student2.courses_now = ['Python', 'English', 'Stepik']
 student2.end_courses = ['SQL']
 
 # Лекторы
@@ -165,21 +165,38 @@ all_courses = ['Stepik', 'Python', 'English', 'SQL']
 
 
 def avg_students_rates(students, course):
+    '''вычисляем средний бал студентов по курсам'''
     all_courses_rates = []
     for student in students:
-        for rate in student.grades.get(course):
-            all_courses_rates += [rate]
-    avg_all_rate = sum(all_courses_rates) / len(all_courses_rates)
+        if course in student.grades.keys():
+            for rate in student.grades.get(course):
+                all_courses_rates += [rate]
+        else:
+            continue
+    if len(all_courses_rates) == 0:
+        avg_all_rate = "Студент не записан на этот курс"
+    else:
+        avg_all_rate = sum(all_courses_rates) / len(all_courses_rates)
     print(f'Средняя оценка студентов за курс {course}: {avg_all_rate}')
 
 
+
 def avg_lectors_rates(lectores, course):
+    '''вычисляем средний бал лекторов по курсам'''
     all_courses_rates = []
     for lector in lectores:
-        for rate in lector.grades.get(course):
-            all_courses_rates += [rate]
-    avg_all_rate_lec = sum(all_courses_rates) / len(all_courses_rates)
-    print(f'Средняя оценка за курс {course}: {avg_all_rate_lec}')
+        if course in lector.grades.keys():
+            for rate in lector.grades.get(course):
+                all_courses_rates += [rate]
+
+            else:
+                continue
+    if len(all_courses_rates) == 0:
+        avg_all_rate_lec = "Лектор не записан на этот курс"
+    else:
+        avg_all_rate_lec = sum(all_courses_rates) / len(all_courses_rates)
+    print(f'Средняя оценка за курс лекторов {course}: {avg_all_rate_lec}')
 
 
-avg_students_rates(students_list, all_courses[0])
+avg_students_rates(students_list, all_courses[1])
+avg_lectors_rates(students_list, all_courses[2])
