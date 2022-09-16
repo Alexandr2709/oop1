@@ -1,4 +1,3 @@
-
 class Student:
     '''класс студента'''
 
@@ -81,7 +80,6 @@ class Lector(Mentor):
             self.avg_lector = sum(rates_list) / len(rates_list)
         return self.avg_lector
 
-
     def __str__(self):
         return f"Имя: {self.name}" \
                f"\nФамилия: {self.last_name}" \
@@ -123,15 +121,15 @@ student1.courses_now = ['Stepik', 'Python', 'English']
 student1.end_courses = ['SQL']
 
 student2 = Student("Mikha", "Egorof", "man")
-student2.courses_now = ['Mashin', 'Python', 'English']
+student2.courses_now = ['Python', 'English']
 student2.end_courses = ['SQL']
 
 # Лекторы
 lector1 = Lector("Vitaly", "Veselof")
-lector1.courses = ['SQL', 'Python']
+lector1.courses = ['SQL', 'Python', 'English', 'Stepik']
 
 lector2 = Lector("Oleg", "Batka")
-lector2.courses = ['English', 'Python', 'Java']
+lector2.courses = ['English', 'Python', 'SQL', 'Stepik']
 
 # Проверяющие Д/З
 reviewer1 = Reviewer("Naruto", "Yzumaki")
@@ -144,7 +142,7 @@ reviewer1.rate_hw(student1, 'Stepik', 4)
 reviewer1.rate_hw(student1, 'Stepik', 6)
 
 reviewer2 = Reviewer("Mikhail", "Gorshenef")
-reviewer2.courses_attached = ['Python', 'SQL', 'Java']
+reviewer2.courses_attached = ['Python', 'SQL']
 
 student1.lector_rate(lector1, 'Python', 7)
 student1.lector_rate(lector2, 'English', 5)
@@ -161,3 +159,27 @@ print(reviewer2, "\n")
 print(student1 > student2)
 print(lector1 > lector2)
 
+students_list = [student1, student2]
+lectores_list = [lector1, lector2]
+all_courses = ['Stepik', 'Python', 'English', 'SQL']
+
+
+def avg_students_rates(students, course):
+    all_courses_rates = []
+    for student in students:
+        for rate in student.grades.get(course):
+            all_courses_rates += [rate]
+    avg_all_rate = sum(all_courses_rates) / len(all_courses_rates)
+    print(f'Средняя оценка студентов за курс {course}: {avg_all_rate}')
+
+
+def avg_lectors_rates(lectores, course):
+    all_courses_rates = []
+    for lector in lectores:
+        for rate in lector.grades.get(course):
+            all_courses_rates += [rate]
+    avg_all_rate_lec = sum(all_courses_rates) / len(all_courses_rates)
+    print(f'Средняя оценка за курс {course}: {avg_all_rate_lec}')
+
+
+avg_students_rates(students_list, all_courses[0])
